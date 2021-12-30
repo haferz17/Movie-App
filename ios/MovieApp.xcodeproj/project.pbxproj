@@ -14,6 +14,11 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		B0BECA872B6A9AA630B6DACA /* libPods-MovieApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C6B2C2D2D8B4B9D9C1846715 /* libPods-MovieApp.a */; };
+		D660BFFE277DF71C00ACA24C /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D660BFFD277DF71B00ACA24C /* OpenSans-Bold.ttf */; };
+		D660C003277DF73F00ACA24C /* OpenSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D660BFFF277DF73F00ACA24C /* OpenSans-ExtraBold.ttf */; };
+		D660C004277DF73F00ACA24C /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D660C000277DF73F00ACA24C /* OpenSans-Light.ttf */; };
+		D660C005277DF73F00ACA24C /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D660C001277DF73F00ACA24C /* OpenSans-SemiBold.ttf */; };
+		D660C006277DF73F00ACA24C /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D660C002277DF73F00ACA24C /* OpenSans-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +47,11 @@
 		7BBCB77CD563CA3088F79D6E /* Pods-MovieApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieApp.debug.xcconfig"; path = "Target Support Files/Pods-MovieApp/Pods-MovieApp.debug.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = MovieApp/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C6B2C2D2D8B4B9D9C1846715 /* libPods-MovieApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MovieApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D660BFFD277DF71B00ACA24C /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Bold.ttf"; path = "../src/assets/fonts/OpenSans-Bold.ttf"; sourceTree = "<group>"; };
+		D660BFFF277DF73F00ACA24C /* OpenSans-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-ExtraBold.ttf"; path = "../src/assets/fonts/OpenSans-ExtraBold.ttf"; sourceTree = "<group>"; };
+		D660C000277DF73F00ACA24C /* OpenSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Light.ttf"; path = "../src/assets/fonts/OpenSans-Light.ttf"; sourceTree = "<group>"; };
+		D660C001277DF73F00ACA24C /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-SemiBold.ttf"; path = "../src/assets/fonts/OpenSans-SemiBold.ttf"; sourceTree = "<group>"; };
+		D660C002277DF73F00ACA24C /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Regular.ttf"; path = "../src/assets/fonts/OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		F45FA022037F5159C48367E3 /* libPods-MovieApp-MovieAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MovieApp-MovieAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -114,7 +124,6 @@
 				2B649C91944B1177BC9650F6 /* Pods-MovieApp-MovieAppTests.debug.xcconfig */,
 				369CEC0B7032823771F72465 /* Pods-MovieApp-MovieAppTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -128,6 +137,11 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				D660BFFF277DF73F00ACA24C /* OpenSans-ExtraBold.ttf */,
+				D660C000277DF73F00ACA24C /* OpenSans-Light.ttf */,
+				D660C002277DF73F00ACA24C /* OpenSans-Regular.ttf */,
+				D660C001277DF73F00ACA24C /* OpenSans-SemiBold.ttf */,
+				D660BFFD277DF71B00ACA24C /* OpenSans-Bold.ttf */,
 				13B07FAE1A68108700A75B9A /* MovieApp */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* MovieAppTests */,
@@ -245,6 +259,11 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				D660BFFE277DF71C00ACA24C /* OpenSans-Bold.ttf in Resources */,
+				D660C003277DF73F00ACA24C /* OpenSans-ExtraBold.ttf in Resources */,
+				D660C004277DF73F00ACA24C /* OpenSans-Light.ttf in Resources */,
+				D660C005277DF73F00ACA24C /* OpenSans-SemiBold.ttf in Resources */,
+				D660C006277DF73F00ACA24C /* OpenSans-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

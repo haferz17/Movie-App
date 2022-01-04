@@ -14,7 +14,7 @@ const Detail = (props) => {
     const { similarList } = useSelector(state => state.movie)
     const { data } = props.route.params
 
-    console.log("object", similarList)
+    console.log("object", data)
 
     const fetchData = () => {
         dispatch(getSimilarAction(data?.id))
@@ -44,11 +44,11 @@ const Detail = (props) => {
         )
     }
 
-    const renderItem = ({ item, index }, type) => {
+    const renderItem = ({ item, index }) => {
         return (
             <TouchableOpacity
                 activeOpacity={0.5}
-                onPress={() => props.navigation.replace(DETAIL, { data: item, type })}
+                onPress={() => props.navigation.replace(DETAIL, { data: item })}
                 style={styles.eventItem(index)} >
                 <ImageBackground source={{ uri: `${BaseUrlImage}${item?.poster_path}` || 'https://heduparts.com/uploads/placeholder.png' }} style={{ width: wp(41.5), height: wp(63), borderRadius: hp(0.3) }} >
                     <LinearGradient
@@ -58,7 +58,7 @@ const Detail = (props) => {
                         <View style={{ flex: 1, justifyContent: 'flex-end', paddingBottom: wp(2.5), paddingHorizontal: wp(2) }}>
                             <Text numberOfLines={1} style={{ color: color.primary }}>Fantasy</Text>
                             {renderStar(5)}
-                            <Text numberOfLines={2} style={{ color: color.light, fontSize: fontSize.medium - 1, fontWeight: 'bold', marginTop: hp(0.5) }}>{type ? item.name : item.title}</Text>
+                            <Text numberOfLines={2} style={{ color: color.light, fontSize: fontSize.medium - 1, fontWeight: 'bold', marginTop: hp(0.5) }}>{item.name || item.title}</Text>
                         </View>
                     </LinearGradient>
                 </ImageBackground>
@@ -89,14 +89,14 @@ const Detail = (props) => {
                         <Text numberOfLines={1} style={{ color: color.primary, fontWeight: 'bold', marginBottom: hp(1) }}>Fantasy</Text>
                         <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: hp(0.8) }}>
                             {renderStar(5)}
-                            <Text style={{ color: color.light }}>• Release Year : {data?.release_date ? data?.release_date.slice(0, 4) : '-'}</Text>
+                            <Text style={{ color: color.light }}>• Release Year : {data?.release_date ? data?.release_date.slice(0, 4) : data?.first_air_date ? data?.first_air_date.slice(0, 4) : '-'}</Text>
                         </View>
-                        <Text numberOfLines={1} style={{ color: color.light, fontSize: fontSize.semiLarge, fontWeight: 'bold', marginBottom: hp(2) }}>{data.title}</Text>
+                        <Text numberOfLines={1} style={{ color: color.light, fontSize: fontSize.semiLarge, fontWeight: 'bold', marginBottom: hp(2) }}>{data?.title || data?.name}</Text>
                     </LinearGradient>
                 </ImageBackground>
                 <View style={{ paddingHorizontal: wp(4.5), paddingTop: hp(2.5) }}>
                     <Text style={styles.titleSection()}>Synopsis</Text>
-                    <Text style={{ color: 'white', fontSize: fontSize.extraSmall, paddingVertical: wp(4.5), paddingHorizontal: wp(5), backgroundColor: 'gray', marginTop: hp(2) }}>{data?.overview}</Text>
+                    <Text style={{ color: 'white', fontSize: fontSize.extraSmall, paddingVertical: wp(4.5), paddingHorizontal: wp(5), backgroundColor: 'gray', marginTop: hp(2) }}>{data?.overview || 'No Synopsis'}</Text>
                     <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: hp(2.5) }}>
                         <Text numberOfLines={1} style={{ color: 'white', fontSize: fontSize.semiMedium - 0.5, maxWidth: '88%' }}>Cast :
                             <Text style={{ color: 'white', fontSize: fontSize.semiMedium - 0.5, fontWeight: 'bold' }}> Gal Gadot, Kristen Wiig, Chris Pine</Text>
@@ -187,7 +187,7 @@ const styles = StyleSheet.create({
     eventItem: (index) => ({
         flexDirection: 'row',
         marginLeft: index == 0 ? wp(4.5) : wp(3),
-        marginRight: index !== 2 ? 0 : wp(4.5),
+        marginRight: index !== 4 ? 0 : wp(4.5),
     }),
     slide: () => ({
         height: hp(35)

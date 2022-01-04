@@ -6,7 +6,9 @@ const initialState = {
     isError: false,
     movieList: [],
     tvList: [],
-    similarList: []
+    similarList: [],
+    pages: 0,
+    tvPages: 0
 }
 
 const movieReducer = (state = initialState, action) => {
@@ -17,13 +19,17 @@ const movieReducer = (state = initialState, action) => {
                 isLoading: true,
                 isSuccess: false,
                 isError: false,
+                movieList: action.reset ? [] : state.movieList
             }
         case a.GET_LIST_MOVIE_SUCCESS:
+            const stateData = state.movieList
+            const data = action.isLoadMore ? stateData.concat(action.data) : action.data
             return {
                 ...state,
                 isLoading: false,
                 isSuccess: true,
-                movieList: action.data,
+                movieList: data,
+                pages: action.pages
             }
         case a.GET_LIST_MOVIE_FAILED:
             return {
@@ -37,13 +43,17 @@ const movieReducer = (state = initialState, action) => {
                 isLoading: true,
                 isSuccess: false,
                 isError: false,
+                tvList: action.reset ? [] : state.tvList
             }
         case a.GET_LIST_TV_SUCCESS:
+            const stateDataTV = state.tvList
+            const dataTV = action.isLoadMore ? stateDataTV.concat(action.data) : action.data
             return {
                 ...state,
                 isLoading: false,
                 isSuccess: true,
-                tvList: action.data,
+                tvList: dataTV,
+                tvPages: action.pages
             }
         case a.GET_LIST_TV_FAILED:
             return {

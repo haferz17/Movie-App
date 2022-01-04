@@ -12,24 +12,41 @@ export const movieWatcher = [
 
 const request = async (api) => {
     const res = await axios.get(api)
-    return res?.data?.results
+    return {
+        page: res?.data?.total_pages,
+        data: res?.data?.results
+    }
 }
 
-function* getListMovie() {
-    yield put({ type: a.GET_LIST_MOVIE_START })
+function* getListMovie(action) {
+    const { page, reset } = action.payload
+    yield put({ type: a.GET_LIST_MOVIE_START, reset })
     try {
-        const data = yield request(GetListMovieApi)
-        yield put({ type: a.GET_LIST_MOVIE_SUCCESS, data: data ? data.slice(0, 10) : [] })
+        const res = yield request(GetListMovieApi(page))
+        const pages = res.page
+        const isLoadMore = page > 1
+        yield put({
+            type: a.GET_LIST_MOVIE_SUCCESS,
+            data: res.data ? res.data.slice(0, 10) : [],
+            pages, isLoadMore
+        })
     } catch (error) {
         yield put({ type: a.GET_LIST_MOVIE_FAILED })
     }
 }
 
-function* getListTV() {
-    yield put({ type: a.GET_LIST_TV_START })
+function* getListTV(action) {
+    const { page, reset } = action.payload
+    yield put({ type: a.GET_LIST_TV_START, reset })
     try {
-        const data = yield request(GetListTVApi)
-        yield put({ type: a.GET_LIST_TV_SUCCESS, data: data ? data.slice(0, 10) : [] })
+        const res = yield request(GetListTVApi(page))
+        const pages = res.page
+        const isLoadMore = page > 1
+        yield put({
+            type: a.GET_LIST_TV_SUCCESS,
+            data: res.data ? res.data.slice(0, 10) : [],
+            pages, isLoadMore
+        })
     } catch (error) {
         yield put({ type: a.GET_LIST_TV_FAILED })
     }
@@ -39,8 +56,11 @@ function* getSimilar(action) {
     const { id } = action.payload
     yield put({ type: a.GET_SIMILAR_MOVIE_START })
     try {
-        const data = yield request(GetSimilarApi(id))
-        yield put({ type: a.GET_SIMILAR_MOVIE_SUCCESS, data: data ? data.slice(0, 10) : [] })
+        const res = yield request(GetSimilarApi(id))
+        yield put({
+            type: a.GET_SIMILAR_MOVIE_SUCCESS,
+            data: res.data ? res.data.slice(0, 10) : []
+        })
     } catch (error) {
         yield put({ type: a.GET_SIMILAR_MOVIE_FAILED })
     }

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react"
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { Home, Splash, Detail } from '../screens'
-import { HOME, SPLASH, DETAIL } from '../config/navigation'
+import { Home, Splash, Detail, ListMovie } from '../screens'
+import { HOME, SPLASH, DETAIL, LIST_MOVIE } from '../config/navigation'
 
 const Stack = createNativeStackNavigator();
 
@@ -21,7 +21,7 @@ const AppNavigation = () => {
                 }
                 <Stack.Screen name={HOME} component={Home} />
                 <Stack.Screen name={DETAIL} component={Detail} />
-                {/* <Stack.Screen name={FORM_TODO} component={FormTodo} /> */}
+                <Stack.Screen name={LIST_MOVIE} component={ListMovie} />
             </Stack.Navigator>
         </NavigationContainer>
     )

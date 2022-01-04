@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { SafeAreaView, Text, StyleSheet, StatusBar, View, ScrollView, Image, ImageBackground, FlatList, RefreshControl, TouchableOpacity } from 'react-native'
 import { useDispatch, useSelector } from "react-redux"
 import { getListMovieAction, getListTVAction } from "../../redux/actions/movieAction"
-import { AppStyles, BaseUrlImage, DETAIL } from '../../config'
+import { AppStyles, BaseUrlImage, DETAIL, LIST_MOVIE } from '../../config'
 import { Icon } from 'react-native-elements'
 import LinearGradient from 'react-native-linear-gradient'
 import { hp, wp } from '../../utils/Responsive'
@@ -52,7 +52,10 @@ const Home = (props) => {
         return (
             <View style={[styles.content, style]}>
                 <Text style={styles.titleSection()}>{title}</Text>
-                <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <TouchableOpacity
+                    activeOpacity={0.5}
+                    onPress={() => props.navigation.navigate(LIST_MOVIE, { type: title == 'New Release' ? 'new' : '' })}
+                    style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <Text style={styles.titleSection('see')}>See All</Text>
                     <Icon name="chevron-forward" type="ionicon" color={'yellow'} size={22} />
                 </TouchableOpacity>
@@ -70,11 +73,11 @@ const Home = (props) => {
         )
     }
 
-    const renderItem = ({ item, index }, type) => {
+    const renderItem = ({ item, index }) => {
         return (
             <TouchableOpacity
                 activeOpacity={0.5}
-                onPress={() => props.navigation.navigate(DETAIL, { data: item, type })}
+                onPress={() => props.navigation.navigate(DETAIL, { data: item })}
                 style={styles.eventItem(index)} >
                 <ImageBackground source={{ uri: `${BaseUrlImage}${item?.poster_path}` || 'https://heduparts.com/uploads/placeholder.png' }} style={{ width: wp(41.5), height: wp(63), borderRadius: hp(0.3) }} >
                     <LinearGradient
@@ -84,7 +87,7 @@ const Home = (props) => {
                         <View style={{ flex: 1, justifyContent: 'flex-end', paddingBottom: wp(2.5), paddingHorizontal: wp(2) }}>
                             <Text numberOfLines={1} style={{ color: color.primary }}>Fantasy</Text>
                             {renderStar(5)}
-                            <Text numberOfLines={2} style={{ color: color.light, fontSize: fontSize.medium - 1, fontWeight: 'bold', marginTop: hp(0.5) }}>{type ? item.name : item.title}</Text>
+                            <Text numberOfLines={2} style={{ color: color.light, fontSize: fontSize.medium - 1, fontWeight: 'bold', marginTop: hp(0.5) }}>{item?.name || item?.title}</Text>
                         </View>
                     </LinearGradient>
                 </ImageBackground>
@@ -152,7 +155,7 @@ const Home = (props) => {
                         horizontal
                         data={tvList.slice(0, 5)}
                         keyExtractor={(item, index) => item.id.toString()}
-                        renderItem={(val) => renderItem(val, 'tv')}
+                        renderItem={renderItem}
                         showsHorizontalScrollIndicator={false}
                     />
                 </View>
@@ -207,7 +210,7 @@ const styles = StyleSheet.create({
     eventItem: (index) => ({
         flexDirection: 'row',
         marginLeft: index == 0 ? wp(4.5) : wp(3),
-        marginRight: index !== 2 ? 0 : wp(4.5),
+        marginRight: index !== 4 ? 0 : wp(4.5),
     }),
     slide: () => ({
         height: hp(35)

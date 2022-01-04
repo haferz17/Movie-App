@@ -1,11 +1,13 @@
 import { GET_LIST_MOVIE, GET_LIST_TV, GET_SIMILAR_MOVIE } from '../../config/actionType'
 
-export const getListMovieAction = () => ({
-    type: GET_LIST_MOVIE
+export const getListMovieAction = (item) => ({
+    type: GET_LIST_MOVIE,
+    payload: item
 })
 
-export const getListTVAction = () => ({
-    type: GET_LIST_TV
+export const getListTVAction = (item) => ({
+    type: GET_LIST_TV,
+    payload: item
 })
 
 export const getSimilarAction = (id) => ({

@@ -1,6 +1,5 @@
 import React from 'react'
 import { SafeAreaView, StyleSheet, StatusBar, View, Text, Image } from 'react-native'
-// import { All } from '../../config/images';
 import { AppStyles } from '../../config'
 import { hp } from '../../utils/Responsive'
 
@@ -9,10 +8,7 @@ const { font, fontSize, fontColor, color } = AppStyles
 const Splash = () => {
     return (
         <SafeAreaView style={styles.container}>
-            <StatusBar backgroundColor={color.primary} translucent />
-            <View style={styles.iconContainer}>
-                {/* <Image source={All} style={styles.icon} /> */}
-            </View>
+            <StatusBar backgroundColor={color.black} translucent />
             <Text style={styles.text}>MovieApp</Text>
         </SafeAreaView>
     );
@@ -23,10 +19,9 @@ export { Splash }
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: color.light,
+        backgroundColor: color.black,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: color.primary
     },
     iconContainer: {
         height: hp(15),

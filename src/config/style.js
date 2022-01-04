@@ -2,7 +2,7 @@ import { wp, fp, hp } from "../utils/Responsive";
 
 const AppStyles = {
   color: {
-    primary: "#2196f3",
+    primary: "#0FEFFD",
     light: "#fff",
     lightGrey: '#eee',
     black: '#000',

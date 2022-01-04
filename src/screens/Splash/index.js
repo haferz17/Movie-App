@@ -18,7 +18,7 @@ const Splash = () => {
     );
 };
 
-export default Splash;
+export { Splash }
 
 const styles = StyleSheet.create({
     container: {

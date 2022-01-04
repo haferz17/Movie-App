@@ -32,7 +32,7 @@ const ListMovie = (props) => {
         }
     }
 
-    useEffect(() => { fetchData(1, true) }, [])
+    useEffect(() => { fetchData() }, [])
 
     const renderStar = (val) => {
         let count = []
@@ -81,7 +81,7 @@ const ListMovie = (props) => {
                 keyExtractor={(item, index) => item.id.toString()}
                 renderItem={renderItem}
                 showsHorizontalScrollIndicator={false}
-                refreshing={isLoading}
+                refreshing={isLoadMore ? false : isLoading}
                 onRefresh={() => fetchData(1, true)}
                 onEndReachedThreshold={0.2}
                 onEndReached={loadMore}
@@ -127,7 +127,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         paddingLeft: wp(4.5),
-        paddingVertical: hp(2)
+        paddingVertical: hp(2),
+        paddingTop: hp(4.5)
     },
     poster: {
         width: wp(44),

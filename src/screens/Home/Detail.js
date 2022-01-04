@@ -168,11 +168,11 @@ const styles = StyleSheet.create({
         marginBottom: hp(2)
     }),
     synopsis: () => ({
-        color: 'white',
+        color: color.light,
         fontSize: fontSize.extraSmall,
         paddingVertical: wp(4.5),
         paddingHorizontal: wp(5),
-        backgroundColor: 'gray',
+        backgroundColor: '#242424',
         marginTop: hp(2)
     }),
     row2: {

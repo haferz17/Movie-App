@@ -13,7 +13,7 @@ const Section = ({ title, data, style = {}, onPress = () => null, onPressItem = 
         for (let a = 0; a < val; a++) count.push(a)
         return (
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                {count.map(() => <Icon name="star" type="ionicon" color={color.light} size={14} style={{ marginRight: wp(1) }} />)}
+                {count.map(() => <Icon name="star" type="ionicon" color={color.light} size={12} style={{ marginRight: wp(1) }} />)}
             </View>
         )
     }
@@ -48,7 +48,7 @@ const Section = ({ title, data, style = {}, onPress = () => null, onPressItem = 
                 <Text style={styles.titleSection()}>{title || ''}</Text>
                 <TouchableOpacity onPress={onPress} style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <Text style={styles.titleSection('see')}>See All</Text>
-                    <Icon name="chevron-forward" type="ionicon" color={'yellow'} size={22} />
+                    <Icon name="chevron-forward" type="ionicon" color={'yellow'} size={18} />
                 </TouchableOpacity>
             </View>
             <FlatList

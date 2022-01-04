@@ -81,7 +81,8 @@ const Home = (props) => {
                             height: 11.5,
                             borderRadius: 6,
                             backgroundColor: color.light,
-                            marginHorizontal: -1
+                            marginHorizontal: -1,
+                            color: 'white'
                         }}
                         inactiveDotOpacity={0.6}
                         inactiveDotScale={1}
@@ -150,11 +151,11 @@ const styles = StyleSheet.create({
     }),
     btnWatch: () => ({
         borderWidth: 2,
-        borderColor: 'yellow',
+        borderColor: '#FFE922',
         position: 'absolute',
         top: 0,
-        paddingVertical: wp(3.5),
-        paddingHorizontal: wp(5.5),
+        paddingVertical: wp(2.5),
+        paddingHorizontal: wp(4.5),
         borderRadius: wp(10)
     }),
     watch: () => ({

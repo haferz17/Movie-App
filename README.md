@@ -1,11 +1,5 @@
 <h1 align="center">Movie App</h1>
 
-## Demo
-<div style={flex-direction:row}>
-<!-- <img src="demo/demo.gif" width="200" />
-<img src="demo/demo2.gif" width="200" /> -->
-</div>
-
 ## Requirements
 
 - `npm`

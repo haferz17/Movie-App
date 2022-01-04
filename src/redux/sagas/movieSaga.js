@@ -1,21 +1,13 @@
 
 import { put, takeLatest } from 'redux-saga/effects'
 import axios from 'axios'
-import {
-    GET_LIST_MOVIE,
-    GET_LIST_MOVIE_START,
-    GET_LIST_MOVIE_SUCCESS,
-    GET_LIST_MOVIE_FAILED,
-    GET_LIST_TV,
-    GET_LIST_TV_START,
-    GET_LIST_TV_SUCCESS,
-    GET_LIST_TV_FAILED
-} from '../../config/actionType'
-import { GetListMovieApi, GetListTVApi, apiKey } from '../../config/api'
+import * as a from '../../config/actionType'
+import { GetListMovieApi, GetListTVApi, GetSimilarApi } from '../../config/api'
 
 export const movieWatcher = [
-    takeLatest(GET_LIST_MOVIE, getListMovie),
-    takeLatest(GET_LIST_TV, getListTV),
+    takeLatest(a.GET_LIST_MOVIE, getListMovie),
+    takeLatest(a.GET_LIST_TV, getListTV),
+    takeLatest(a.GET_SIMILAR_MOVIE, getSimilar),
 ]
 
 const request = async (api) => {
@@ -24,23 +16,32 @@ const request = async (api) => {
 }
 
 function* getListMovie() {
-    yield put({ type: GET_LIST_MOVIE_START })
+    yield put({ type: a.GET_LIST_MOVIE_START })
     try {
-        const api = `${GetListMovieApi}?api_key=${apiKey}&language=en-US&page=1`
-        const data = yield request(api)
-        yield put({ type: GET_LIST_MOVIE_SUCCESS, data: data ? data.slice(0, 10) : [] })
+        const data = yield request(GetListMovieApi)
+        yield put({ type: a.GET_LIST_MOVIE_SUCCESS, data: data ? data.slice(0, 10) : [] })
     } catch (error) {
-        yield put({ type: GET_LIST_MOVIE_FAILED })
+        yield put({ type: a.GET_LIST_MOVIE_FAILED })
     }
 }
 
 function* getListTV() {
-    yield put({ type: GET_LIST_TV_START })
+    yield put({ type: a.GET_LIST_TV_START })
     try {
-        const api = `${GetListTVApi}?api_key=${apiKey}&language=en-US&page=1`
-        const data = yield request(api)
-        yield put({ type: GET_LIST_TV_SUCCESS, data: data ? data.slice(0, 10) : [] })
+        const data = yield request(GetListTVApi)
+        yield put({ type: a.GET_LIST_TV_SUCCESS, data: data ? data.slice(0, 10) : [] })
     } catch (error) {
-        yield put({ type: GET_LIST_TV_FAILED })
+        yield put({ type: a.GET_LIST_TV_FAILED })
+    }
+}
+
+function* getSimilar(action) {
+    const { id } = action.payload
+    yield put({ type: a.GET_SIMILAR_MOVIE_START })
+    try {
+        const data = yield request(GetSimilarApi(id))
+        yield put({ type: a.GET_SIMILAR_MOVIE_SUCCESS, data: data ? data.slice(0, 10) : [] })
+    } catch (error) {
+        yield put({ type: a.GET_SIMILAR_MOVIE_FAILED })
     }
 }

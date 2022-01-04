@@ -3,7 +3,7 @@ import { SafeAreaView, Text, StyleSheet, StatusBar, View, ScrollView, Image, Ima
 import { useDispatch, useSelector } from "react-redux"
 import { getListMovieAction, getListTVAction } from "../../redux/actions/movieAction"
 import { AppStyles, BaseUrlImage, DETAIL } from '../../config'
-import { colors, Icon } from 'react-native-elements'
+import { Icon } from 'react-native-elements'
 import LinearGradient from 'react-native-linear-gradient'
 import { hp, wp } from '../../utils/Responsive'
 import Carousel, { Pagination } from 'react-native-snap-carousel'
@@ -20,31 +20,31 @@ const Home = (props) => {
         dispatch(getListTVAction())
     }
 
-    const handleClickNext = (category) => {
-        props.navigation.navigate(TODO_LIST, { category })
-    }
-    const handleGoToForm = (type, item = {}) => {
-        props.navigation.navigate(FORM_TODO, { type, category: '', item })
-    }
-
     // useEffect(() => { fetchData() }, [])
 
-    const renderCarousel = ({ item, index }) => {
+    const renderCarousel = ({ item }) => {
         return (
-            <ImageBackground source={{ uri: `${BaseUrlImage}${item?.poster_path}` || 'https://heduparts.com/uploads/placeholder.png' }} style={{ height: hp(35) }} >
-                <LinearGradient
-                    style={{ width: '100%', height: '100%', justifyContent: 'flex-end', paddingHorizontal: wp(4.5) }}
-                    colors={['rgba(255, 255, 255, 0)', 'rgba(0, 0, 0, 0.6)']}
-                >
-                    <Text numberOfLines={1} style={{ color: color.primary, fontWeight: 'bold', marginBottom: hp(1) }}>Fantasy</Text>
-                    <Text numberOfLines={1} style={{ color: color.light, fontSize: fontSize.semiLarge, fontWeight: 'bold', marginBottom: hp(2) }}>{item.title}</Text>
-                    <View style={{ height: '33%' }}>
-                        <TouchableOpacity style={{ borderWidth: 2, borderColor: 'yellow', position: 'absolute', top: 0, paddingVertical: wp(3.5), paddingHorizontal: wp(5.5), borderRadius: wp(10) }}>
-                            <Text style={{ color: 'yellow', fontSize: fontSize.semiMedium, fontWeight: 'bold' }}>Watch Now</Text>
-                        </TouchableOpacity>
-                    </View>
-                </LinearGradient>
-            </ImageBackground>
+            <TouchableOpacity
+                activeOpacity={0.5}
+                onPress={() => props.navigation.navigate(DETAIL, { data: item })}>
+                <ImageBackground source={{ uri: `${BaseUrlImage}${item?.poster_path}` || 'https://heduparts.com/uploads/placeholder.png' }} style={{ height: hp(35) }} >
+                    <LinearGradient
+                        style={{ width: '100%', height: '100%', justifyContent: 'flex-end', paddingHorizontal: wp(4.5) }}
+                        colors={['rgba(255, 255, 255, 0)', 'rgba(0, 0, 0, 0.6)']}
+                    >
+                        <Text numberOfLines={1} style={{ color: color.primary, fontWeight: 'bold', marginBottom: hp(1) }}>Fantasy</Text>
+                        <Text numberOfLines={1} style={{ color: color.light, fontSize: fontSize.semiLarge, fontWeight: 'bold', marginBottom: hp(2) }}>{item.title}</Text>
+                        <View style={{ height: '33%' }}>
+                            <TouchableOpacity
+                                activeOpacity={0.5}
+                                onPress={() => props.navigation.navigate(DETAIL, { data: item })}
+                                style={{ borderWidth: 2, borderColor: 'yellow', position: 'absolute', top: 0, paddingVertical: wp(3.5), paddingHorizontal: wp(5.5), borderRadius: wp(10) }}>
+                                <Text style={{ color: 'yellow', fontSize: fontSize.semiMedium, fontWeight: 'bold' }}>Watch Now</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </LinearGradient>
+                </ImageBackground>
+            </TouchableOpacity>
         );
     }
 
@@ -137,7 +137,7 @@ const Home = (props) => {
                     />
                     <FlatList
                         horizontal
-                        data={movieList.slice(0, 3)}
+                        data={movieList.slice(0, 5)}
                         keyExtractor={(item, index) => item.id.toString()}
                         renderItem={renderItem}
                         showsHorizontalScrollIndicator={false}
@@ -150,7 +150,7 @@ const Home = (props) => {
                     />
                     <FlatList
                         horizontal
-                        data={tvList.slice(0, 3)}
+                        data={tvList.slice(0, 5)}
                         keyExtractor={(item, index) => item.id.toString()}
                         renderItem={(val) => renderItem(val, 'tv')}
                         showsHorizontalScrollIndicator={false}

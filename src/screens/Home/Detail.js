@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { SafeAreaView, Text, StyleSheet, StatusBar, View, ScrollView, Image, ImageBackground, FlatList, RefreshControl, TouchableOpacity } from 'react-native'
 import { useDispatch, useSelector } from "react-redux"
-import { getListMovieAction, getListTVAction } from "../../redux/actions/movieAction"
-import { AppStyles, BaseUrlImage } from '../../config'
-import { colors, Icon } from 'react-native-elements'
+import { getSimilarAction } from "../../redux/actions/movieAction"
+import { AppStyles, BaseUrlImage, DETAIL } from '../../config'
+import { Icon } from 'react-native-elements'
 import LinearGradient from 'react-native-linear-gradient'
 import { hp, wp } from '../../utils/Responsive'
 
@@ -11,15 +11,16 @@ const { color, font, fontColor, fontSize, margin } = AppStyles
 
 const Detail = (props) => {
     const dispatch = useDispatch()
-    const { movieList, tvList } = useSelector(state => state.movie)
-    const { data, type } = props.route.params
+    const { similarList } = useSelector(state => state.movie)
+    const { data } = props.route.params
+
+    console.log("object", similarList)
 
     const fetchData = () => {
-        dispatch(getListMovieAction())
-        dispatch(getListTVAction())
+        dispatch(getSimilarAction(data?.id))
     }
 
-    // useEffect(() => { fetchData() }, [])
+    useEffect(() => { fetchData() }, [])
 
     const TitleSection = ({ title = "", onPress = () => null, style, icon = "", font = "" }) => {
         return (
@@ -47,6 +48,7 @@ const Detail = (props) => {
         return (
             <TouchableOpacity
                 activeOpacity={0.5}
+                onPress={() => props.navigation.replace(DETAIL, { data: item, type })}
                 style={styles.eventItem(index)} >
                 <ImageBackground source={{ uri: `${BaseUrlImage}${item?.poster_path}` || 'https://heduparts.com/uploads/placeholder.png' }} style={{ width: wp(41.5), height: wp(63), borderRadius: hp(0.3) }} >
                     <LinearGradient
@@ -87,7 +89,7 @@ const Detail = (props) => {
                         <Text numberOfLines={1} style={{ color: color.primary, fontWeight: 'bold', marginBottom: hp(1) }}>Fantasy</Text>
                         <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: hp(0.8) }}>
                             {renderStar(5)}
-                            <Text style={{ color: color.light }}>• Release Year : {data?.release_date.slice(0, 4)}</Text>
+                            <Text style={{ color: color.light }}>• Release Year : {data?.release_date ? data?.release_date.slice(0, 4) : '-'}</Text>
                         </View>
                         <Text numberOfLines={1} style={{ color: color.light, fontSize: fontSize.semiLarge, fontWeight: 'bold', marginBottom: hp(2) }}>{data.title}</Text>
                     </LinearGradient>
@@ -128,7 +130,7 @@ const Detail = (props) => {
                     />
                     <FlatList
                         horizontal
-                        data={movieList.slice(0, 3)}
+                        data={similarList.slice(0, 3)}
                         keyExtractor={(item, index) => item.id.toString()}
                         renderItem={renderItem}
                         showsHorizontalScrollIndicator={false}

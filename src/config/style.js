@@ -3,9 +3,9 @@ import { wp, fp, hp } from "../utils/Responsive";
 const AppStyles = {
   color: {
     primary: "#2196f3",
-    light: "#fff",
+    light: "#000",
     lightGrey: '#eee',
-    black: '#000',
+    black: '#fff',
     grey: '#ccc',
   },
   font: {
@@ -40,4 +40,4 @@ const AppStyles = {
   },
 };
 
-export default AppStyles;
+export { AppStyles }

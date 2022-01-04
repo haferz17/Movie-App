@@ -1,7 +1,7 @@
 import React from 'react'
 import { SafeAreaView, StyleSheet, StatusBar, View, Text, Image } from 'react-native'
 // import { All } from '../../config/images';
-import AppStyles from '../../config/style'
+import { AppStyles } from '../../config'
 import { hp } from '../../utils/Responsive'
 
 const { font, fontSize, fontColor, color } = AppStyles
@@ -13,7 +13,7 @@ const Splash = () => {
             <View style={styles.iconContainer}>
                 {/* <Image source={All} style={styles.icon} /> */}
             </View>
-            <Text style={styles.text}>Todo List</Text>
+            <Text style={styles.text}>MovieApp</Text>
         </SafeAreaView>
     );
 };

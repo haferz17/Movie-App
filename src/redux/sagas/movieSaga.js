@@ -6,21 +6,41 @@ import {
     GET_LIST_MOVIE_START,
     GET_LIST_MOVIE_SUCCESS,
     GET_LIST_MOVIE_FAILED,
+    GET_LIST_TV,
+    GET_LIST_TV_START,
+    GET_LIST_TV_SUCCESS,
+    GET_LIST_TV_FAILED
 } from '../../config/actionType'
-import { GetListMovieApi } from '../../config/api'
+import { GetListMovieApi, GetListTVApi, apiKey } from '../../config/api'
+
+export const movieWatcher = [
+    takeLatest(GET_LIST_MOVIE, getListMovie),
+    takeLatest(GET_LIST_TV, getListTV),
+]
+
+const request = async (api) => {
+    const res = await axios.get(api)
+    return res?.data?.results
+}
 
 function* getListMovie() {
     yield put({ type: GET_LIST_MOVIE_START })
     try {
-        const res = yield axios.get(GetListMovieApi)
-        const data = res.data.slice(0, 10)
-        const newData = createTodoListData(data)
-        yield put({ type: GET_LIST_MOVIE_SUCCESS, data: newData })
+        const api = `${GetListMovieApi}?api_key=${apiKey}&language=en-US&page=1`
+        const data = yield request(api)
+        yield put({ type: GET_LIST_MOVIE_SUCCESS, data: data ? data.slice(0, 10) : [] })
     } catch (error) {
         yield put({ type: GET_LIST_MOVIE_FAILED })
     }
 }
 
-export function* movieWatcher() {
-    yield takeLatest(GET_LIST_MOVIE, getListMovie)
-}   
+function* getListTV() {
+    yield put({ type: GET_LIST_TV_START })
+    try {
+        const api = `${GetListTVApi}?api_key=${apiKey}&language=en-US&page=1`
+        const data = yield request(api)
+        yield put({ type: GET_LIST_TV_SUCCESS, data: data ? data.slice(0, 10) : [] })
+    } catch (error) {
+        yield put({ type: GET_LIST_TV_FAILED })
+    }
+}

@@ -15,7 +15,7 @@ const AppNavigation = () => {
 
     return (
         <NavigationContainer>
-            <Stack.Navigator headerMode="none">
+            <Stack.Navigator screenOptions={{ headerShown: false }}>
                 {isSplashShow &&
                     <Stack.Screen name={SPLASH} component={Splash} />
                 }

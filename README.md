@@ -1,4 +1,4 @@
-<h1 align="center">Todo List App</h1>
+<h1 align="center">Movie App</h1>
 
 ## Demo
 <div style={flex-direction:row}>
